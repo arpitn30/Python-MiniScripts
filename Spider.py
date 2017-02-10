@@ -9,7 +9,9 @@ class LinkParser(HTMLParser):
         if tag == 'a':
             for (key, value) in attrs:
                 if key == 'href':
+                    # Get all the links on the page
                     newUrl = parse.urljoin(self.baseUrl, value)
+                    # Add only the new links to self.links
                     if newUrl not in self.links:
                         self.links = self.links + [newUrl]
 
@@ -17,10 +19,14 @@ class LinkParser(HTMLParser):
         self.links = []
         self.baseUrl = url
         response = urlopen(url)
+        # Only access if the file is html
         if response.getheader('Content-Type') == 'text/html':
+            # Read the html data on the page
             htmlBytes = response.read()
             htmlString = htmlBytes.decode('utf-8')
+            # feed only reads strings and not bytes
             self.feed(htmlString)
+            # Called handle_starttag and get links on the page
             return htmlString, self.links
         else:
             return '', []
@@ -40,6 +46,7 @@ def spider(url, word, maxPages):
             print(numberVisited, 'Visiting: ', url)
             parser = LinkParser()
             data, links = parser.getLinks(url)
+            # Find the word in the html data of the page
             if data.find(word) > -1:
                 foundWord.append(url)
             # Add the links in the Links List to pagesToVisit after removing duplicates
