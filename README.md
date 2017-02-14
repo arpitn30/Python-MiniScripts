@@ -8,3 +8,6 @@ Automatically renames all the episodes of your downloaded tv series/anime for th
 
 ### Spider
 Crawls the given website and lists all the occurrences of the word to be found in the specifies no of pages
+
+### Spider (bs4)
+A spider search using BeautifulSoup which parses php redirect links as well
