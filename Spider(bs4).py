@@ -30,7 +30,8 @@ def main():
             if (text.find(word) is not None) and (url not in foundWord):
                 foundWord.append(url)
             # Add all the urls on the page to the Links list
-            Links.extend(page['href'] for page in soup.find_all('a', href=True) if page['href'] not in Links)
+            Links.extend(page['href'] for page in soup.find_all('a', href=True) if page['href'] not in Links
+                                                                                and page['href'].startswith(Links[0]))
 
             print('**Success!**')
         except:
