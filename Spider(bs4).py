@@ -27,7 +27,7 @@ def main():
             body = soup.find('body')
             text = text + '\n' + body.get_text()
             # Find the word in the text and if found, store the url
-            if (text.find(word) is not None) and (url not in foundWord):
+            if (text.find(word) != -1) and (url not in foundWord):
                 foundWord.append(url)
             # Add all the urls on the page to the Links list
             Links.extend(page['href'] for page in soup.find_all('a', href=True) if page['href'] not in Links
