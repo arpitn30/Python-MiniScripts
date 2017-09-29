@@ -1,4 +1,5 @@
 # <center>Python MiniScripts</center>
+This repository is a collection of independent programs to automate boring stuff
 
 ### Clipboard Copy
 Copies multiple entries from the clipboard and concatenates them into a single entry for easy pasting
