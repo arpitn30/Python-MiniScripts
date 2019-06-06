@@ -5,7 +5,7 @@ import glob
 ext = '.mp4'    # File Extension
 
 def main():
-    vid_ext = input('Enter extension of the video files: ')
+    vid_ext = input('Enter extension of the video files (Default: mp4): ')
     # If the video extension is not empty, replace ext with entered ext
     if(vid_ext != ''):
         global ext
@@ -13,6 +13,7 @@ def main():
         del vid_ext
     url = input('Enter the wiki url for the season: ')
     dir = input('Enter the path to the directory: ')
+    prefix = input('Enter episode prefix (if needed): ')
     tr = get_table(url)
 
     # Change the root directory of the program to that of the given directory
@@ -35,7 +36,7 @@ def main():
         td = tr[i].find('td', 'summary')
         epname = td.get_text()
         # Concatenate and pretty print the name
-        name = get_name(epno, epname)
+        name = get_name(prefix, epno, epname)
         # Rename the files in the directory
         os.rename(file, name)
         print("Episode " + str(i + 1) + " renamed")
@@ -50,13 +51,13 @@ def get_table(url):
     tr = table.find_all('tr', 'vevent')
     return tr
 
-def get_name(epno, epname):
+def get_name(prefix, epno, epname):
         """Concatenate episode no and name and pretty print it"""
         if(int(epno) < 10):
             epno = "0" + epno
         # Only take the name between " " and convert it back into string
         epname = str((epname.split('\"'))[1])
-        return epno + ' - ' + epname + ext
+        return prefix + epno + ' - ' + epname + ext
 
 if __name__ == '__main__':
     main()
