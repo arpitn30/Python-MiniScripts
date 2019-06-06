@@ -5,6 +5,12 @@ import glob
 ext = '.mp4'    # File Extension
 
 def main():
+    vid_ext = input('Enter extension of the video files: ')
+    # If the video extension is not empty, replace ext with entered ext
+    if(vid_ext != ''):
+        global ext
+        ext = "." + vid_ext
+        del vid_ext
     url = input('Enter the wiki url for the season: ')
     dir = input('Enter the path to the directory: ')
     tr = get_table(url)
